@@ -1,8 +1,14 @@
 import React from 'react';
 
+import Sidebar from "./components/Sidebar";
+import Video from "./components/Video";
+
 function App() {
   return (
-    <h1>Olá mundo!</h1>
+    <div>
+      <Video/>
+      <Sidebar/>
+    </div>
   );
 }
 
