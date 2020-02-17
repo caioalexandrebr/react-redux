@@ -2,14 +2,25 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-const Sidebar = ({ modules }) => (
+function toggleLesson(module, lesson) {
+  return {
+    type: 'TOGGLE_LESSON',
+    module,
+    lesson
+  };
+}
+
+const Sidebar = ({ modules, dispatch }) => (
   <aside>
     { modules.map(module => (
       <div key={module.id}>
         <strong>{ module.title }</strong>
         <ul>
           { module.lessons.map(lesson => (
-            <li>{ lesson.title }</li>
+            <li key={ lesson.id }>
+              { lesson.title }
+              <button onClick={() => dispatch(toggleLesson(module, lesson))}>Selecionar</button>
+            </li>
           )) }
         </ul>
       </div>
@@ -17,4 +28,4 @@ const Sidebar = ({ modules }) => (
   </aside>
 );
 
-export default connect(state => ({ modules: state }))(Sidebar);
+export default connect(state => ({ modules: state.modules }))(Sidebar);
